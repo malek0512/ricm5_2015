@@ -37,7 +37,19 @@ function dragNode( node
 				 , originalMatrix, point_init_par_rapport_node
 				 , currentMatrix
 				 , x, y) {
-	// TO BE DONE
+	// TO BE DONE node.style.transform	= "matrix(0.5,0,0,0.5,0,0)"; cf multitouch.js
+	
+	// Create point + multiply matrice x point
+	var e = x - originalMatrix.a*point_init_par_rapport_node.x - originalMatrix.c*point_init_par_rapport_node.y ;
+	var f = y - originalMatrix.b*point_init_par_rapport_node.x - originalMatrix.d*point_init_par_rapport_node.y ;
+	
+	node.style.transform = "matrix("
+							+ originalMatrix.a + ","
+							+ originalMatrix.b + ","
+							+ originalMatrix.c + ","
+							+ originalMatrix.d + ","
+							+ e + ","
+							+ f + ")";
 }
 
 //______________________________________________________________________________________________________________________
