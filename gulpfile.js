@@ -115,6 +115,23 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', ['lint', 'webpack', 'watch'], function() {
+	var port = 8080;
+	
+	var express = require('express');
+	var app = express();
+	app.use(express.static(__dirname + '/images'));
+	
+	app.get('/images/:id',function(req, res){
+		res.sendFile(__dirname+'/images/'+req.params.id)
+	})
+	app.get('/', function(req, res){
+		res.sendFile(__dirname+'/index.html');
+	})
+
+	app.listen(port, function(){
+		console.log('Listening on', port)
+	});
+	
 	console.log("Done!");
 });
 

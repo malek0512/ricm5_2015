@@ -10,6 +10,7 @@
     "url": "https://github.com/AlexDmr/tacthab.git"
   },
   "dependencies": {
+    "express": "^4.13.3"
   },
   "devDependencies": {
     "css-loader": "0.16.0",

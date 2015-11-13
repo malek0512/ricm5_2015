@@ -63,8 +63,8 @@ function rotoZoomNode( node
 	,	dy = pt_init_2.y - pt_init_1.y
 	, 	dxp = pt_current_2.x - pt_current_1.x
 	, 	dyp = pt_current_2.y - pt_current_1.y
-	, 	s = undefined
-	, 	c = undefined
+	, 	s = 0
+	, 	c = 0
 	;
 
 	if (dx === dy && dx === 0)
