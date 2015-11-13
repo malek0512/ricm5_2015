@@ -58,7 +58,44 @@ function rotoZoomNode( node
 					 , pt_init_1, pt_current_1
 					 , pt_init_2, pt_current_2
 					 ) {
-	// TO BE DONE
+	
+	var dx = pt_init_2.x - pt_init_1.x
+	,	dy = pt_init_2.y - pt_init_1.y
+	, 	dxp = pt_current_2.x - pt_current_1.x
+	, 	dyp = pt_current_2.y - pt_current_1.y
+	, 	s = undefined
+	, 	c = undefined
+	;
+
+	if (dx === dy && dx === 0)
+	{
+		// Les points se confondent, on laisse 
+		return console.error("Les points se confondent, on abondone");
+	}
+	else if (dx === 0 && dy !== 0)
+	{
+		s = -1 * dxp / dy ;
+		c = dyp / dy;
+	} else if (dx !== 0 && dy === 0)
+	{
+		s = dyp / dx ;
+		c = dxp / dx;
+	} else if (dx !== 0 && dy !== 0)
+	{
+		s = (dyp/dy - dxp/dx) / (dy/dx + dx/dy);
+		c = (dxp + s*dy) / dx;
+	}
+
+	var e = pt_current_1.x - c*pt_init_1.x + s*pt_init_1.y;
+	var f = pt_current_1.y - s*pt_init_1.x - c*pt_init_1.y;
+
+	node.style.transform = "matrix("
+							+ c + ","
+							+ (-1*s) + ","
+							+ e + ","
+							+ s + ","
+							+ c + ","
+							+ f + ")";
 }
 
 //______________________________________________________________________________________________________________________
