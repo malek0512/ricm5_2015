@@ -69,9 +69,12 @@ var automataRotoZoom = {
 				console.log( "automataRotoZoom::rotozoom", conf, event);
 				switch(event) {
 					case "release":
+						// delete configOfTouchId[touch.identifier];
 						delete configOfTouchId[touch.identifier];
+						delete conf.touchesId[touch.identifier];
 						conf.originalMatrix	= transfo.copyMatrix( conf.currentMatrix );
 						conf.originalMatrixInv	= conf.originalMatrix.inverse();
+						configOfTouchId[ touch.identifier ] = conf;
 						conf.state = "drag";
 						break;
 					case "move":
@@ -85,10 +88,10 @@ var automataRotoZoom = {
 						 	, conf.touchesId[id2].point, conf.touchesId[id2].currentPoint
 						);
 						break;
-					case "press":
-						conf.state = "nothing";
-						console.log("rotozoom:press", touch.identifier);
-						break;
+					// case "press":
+					// 	conf.state = "nothing";
+					// 	console.log("rotozoom:press", touch.identifier);
+					// 	break;
 					}
 				}
 };

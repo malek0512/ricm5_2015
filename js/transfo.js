@@ -88,6 +88,14 @@ function rotoZoomNode( node
 
 	var e = pt_current_1.x - c*pt_init_1.x + s*pt_init_1.y;
 	var f = pt_current_1.y - s*pt_init_1.x - c*pt_init_1.y;
+	var newMat = currentMatrix;
+
+	newMat.a = c;
+	newMat.b = s;
+	newMat.c = (-1*s);
+	newMat.d = c;
+	newMat.e = e;
+	newMat.f = f;
 
 	node.style.transform = "matrix("
 							+ c + ","
