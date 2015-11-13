@@ -62,6 +62,26 @@ var automataRotoZoom = {
 	rotozoom: function(conf, event, touch) {
 				 // TO BE DONE
 				 console.log( "automataRotoZoom::rotozoom", conf, event);
+				 switch(event) {
+					 case "release":
+						 delete configOfTouchId[touch.identifier];
+						 conf.originalMatrix	= transfo.copyMatrix( conf.currentMatrix );
+						 conf.originalMatrixInv	= conf.originalMatrix.inverse();
+						 conf.state = "drag";
+						 break;
+					 case "move":
+						 // console.log("rotozoom with", touch.identifier);
+						 conf.touchesId[touch.identifier].currentPoint.x = touch.pageX;
+						 conf.touchesId[touch.identifier].currentPoint.y = touch.pageY;
+						 var id1 = conf.touches[0]
+						   , id2 = conf.touches[1];
+						 transfo.rotoZoomNode( conf.node
+											 , conf.originalMatrix, conf.currentMatrix
+											 , conf.touchesId[id1].point, conf.touchesId[id1].currentPoint
+											 , conf.touchesId[id2].point, conf.touchesId[id2].currentPoint
+											 );
+						 break;
+					}
 				}
 };
 
@@ -78,6 +98,7 @@ function startMouse(event) {
 	  , conf	= config[ node.dataset.confId ]
 	  ;
 	console.log("startMouse");
+	console.log("Touch start mouse", event)
 	conf.automata[conf.state].apply(conf, [conf, "press", event]);
 }
 
