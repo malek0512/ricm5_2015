@@ -120,6 +120,7 @@ gulp.task('default', ['lint', 'webpack', 'watch'], function() {
 	var express = require('express');
 	var app = express();
 	app.use(express.static(__dirname + '/images'));
+	app.use(express.static(__dirname + '/js'));
 	
 	app.get('/images/:id',function(req, res){
 		res.sendFile(__dirname+'/images/'+req.params.id)
