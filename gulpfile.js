@@ -125,6 +125,15 @@ gulp.task('default', ['lint', 'webpack', 'watch'], function() {
 	app.get('/images/:id',function(req, res){
 		res.sendFile(__dirname+'/images/'+req.params.id)
 	})
+
+	app.get('/js/:id',function(req, res){
+		res.sendFile(__dirname+'/js/'+req.params.id)
+	})
+
+	app.get('/:id',function(req, res){
+		res.sendFile(__dirname+'/'+req.params.id)
+	})
+
 	app.get('/', function(req, res){
 		res.sendFile(__dirname+'/index.html');
 	})
