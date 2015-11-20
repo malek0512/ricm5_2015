@@ -37,19 +37,12 @@ function dragNode( node
 				 , originalMatrix, point_init_par_rapport_node
 				 , currentMatrix
 				 , x, y) {
-	// TO BE DONE node.style.transform	= "matrix(0.5,0,0,0.5,0,0)"; cf multitouch.js
+	var point_par_rapport_parent = getPoint(x, y), M = currentMatrix;
 	
-	// Create point + multiply matrice x point
-	var e = x - originalMatrix.a*point_init_par_rapport_node.x - originalMatrix.c*point_init_par_rapport_node.y ;
-	var f = y - originalMatrix.b*point_init_par_rapport_node.x - originalMatrix.d*point_init_par_rapport_node.y ;
-	
-	node.style.transform = "matrix("
-							+ originalMatrix.a + ","
-							+ originalMatrix.b + ","
-							+ originalMatrix.c + ","
-							+ originalMatrix.d + ","
-							+ e + ","
-							+ f + ")";
+	M.e = point_par_rapport_parent.x - M.a*point_init_par_rapport_node.x - M.c*point_init_par_rapport_node.y;
+	M.f = point_par_rapport_parent.y - M.b*point_init_par_rapport_node.x - M.d*point_init_par_rapport_node.y;
+					
+	node.style.transform = "matrix("+M.a+", "+M.b+", "+M.c+", "+M.d+", "+M.e+", "+M.f+")";
 }
 
 //______________________________________________________________________________________________________________________
@@ -58,8 +51,7 @@ function rotoZoomNode( node
 					 , pt_init_1, pt_current_1
 					 , pt_init_2, pt_current_2
 					 ) {
-	
-	var dx = pt_init_2.x - pt_init_1.x
+		var dx = pt_init_2.x - pt_init_1.x
 	,	dy = pt_init_2.y - pt_init_1.y
 	, 	dxp = pt_current_2.x - pt_current_1.x
 	, 	dyp = pt_current_2.y - pt_current_1.y
@@ -104,7 +96,6 @@ function rotoZoomNode( node
 							+ c + ","
 							+ e + ","
 							+ f + ")";
-							
 }
 
 //______________________________________________________________________________________________________________________

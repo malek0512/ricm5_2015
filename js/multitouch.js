@@ -53,6 +53,9 @@ var automataRotoZoom = {
 						 break;
 					 case "press":
 						console.log("drag press with", touch.identifier);
+						conf.originalMatrix	= transfo.copyMatrix( conf.currentMatrix );
+						conf.originalMatrixInv	= conf.originalMatrix.inverse();
+
 						conf.touches = Object.keys(conf.touchesId);
 						conf.touches.push(touch.identifier);
 						conf.touchesId[touch.identifier] = {
